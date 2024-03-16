@@ -117,6 +117,9 @@ header .current-date{
 .btn:active{
   background-color: black;
 }
+.btn:disabled{
+  display: none;
+}
 /* .days li:not(.active):hover::before{
   background: #f2f2f2;
 } */

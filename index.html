@@ -77,19 +77,22 @@
         console.error(error);
       });
     }
-
+    btn.disabled = true;
+    if(today.getHours()>=22){
+      btn.disabled = false;
+    }
 
     btn.addEventListener('click', () => {
       set(ref(db, "achieved-dates"),
         {
           dates: [...prevData, str]
         });
+      document.location.reload();
     })
 
     const starCountRef = ref(db, "achieved-dates");
     onValue(starCountRef, (snapshot) => {
       const prevData = snapshot.val().dates;
-      console.log("onValue method");
 
       const daysTag = document.querySelector(".days")
       const currentDate = document.querySelector(".current-date")
@@ -111,20 +114,12 @@
         let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay()
         let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate()
         let liTag = ""
-
-        // == days.find(ele => ele == i) ? "&#10004;" : i
-
-        const days = [];
-        console.log(prevData);
+        
         for (let i = firstDayofMonth; i > 0; i--) {
           liTag += `<li class="inactive"></li>`;
         }
 
         for (let i = 1; i <= lastDateofMonth; i++) {
-
-         
-
-
           let isToday = i === date.getDate() && currMonth === new Date().getMonth()
             && currYear === new Date().getFullYear() ? "active" : "";
           liTag += `<li class="${prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)||isToday ? "active" : ""}" >${prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)?"&#10004;":i}</li>`;
