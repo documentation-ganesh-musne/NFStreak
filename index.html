@@ -124,7 +124,7 @@
             && currYear === new Date().getFullYear() ? "active" : "";
 
           let currDate = new Date(""+currYear+"-"+(currMonth+1)+"-"+i);
-          liTag += `<li class="${prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)? "active" : ""} ${isToday ? "today" :""} ${!(isToday)&&(currDate < date)&&!(prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)) ? "not-achived" : ""} " >${prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)?"&#10004;":i}</li>`;
+          liTag += `<li class="${prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)? "active" : ""} ${isToday && !(prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)) ? "today" :""} ${!(isToday)&&(currDate < date)&&!(prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)) ? "not-achived" : ""} " >${prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)?"&#10004;":i}</li>`;
         }
 
         for (let i = lastDayofMonth; i < 6; i++) {
