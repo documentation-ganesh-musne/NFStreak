@@ -96,9 +96,22 @@ header .current-date{
   transform: translate(-50%, -50%);
 }
 .days li.active::before{
+  background: #7CFC00;
+}
+
+.days li.today{
+  color: #fff;
+}
+.days li.today::before{
   background: #697184;
 }
 
+.days li.not-achived{
+  color: #fff;
+}
+.days li.not-achived::before{
+  background: #FF0000;
+}
 
 .btn-div {
   padding: 1rem;
