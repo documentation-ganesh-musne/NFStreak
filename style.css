@@ -137,12 +137,11 @@ header .current-date{
 .counter{
   width: 100%;
   text-align: start;
-  padding: 1rem 0 0 1.7rem;
+  padding: 1rem 0 0 1.8rem;
 }
 .counter-txt{
-  color: #0d6efd;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 
