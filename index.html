@@ -13,6 +13,9 @@
 
 <body>
   <div class="wrapper">
+    <div class="counter">
+      <span class="counter-txt">Day Count : <span class="counter-count"></span></span>
+    </div>
     <header>
       <p class="current-date"></p>
       <div class="icons">
@@ -78,7 +81,7 @@
       });
     }
     btn.disabled = true;
-    if(today.getHours()>=22){
+    if (today.getHours() >= 22) {
       btn.disabled = false;
     }
 
@@ -108,13 +111,41 @@
       const months = ["January", "February", "March", "April", "May", "June", "July",
         "August", "September", "October", "November", "December"];
 
+      const monthsDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+      const counter = document.querySelector(".counter-count");
+      let count = 0;
+      let dates = prevData;
+
+      for (let i = 0; i < dates.length - 1; i++) {
+        let currDate = dates[i].split("/");
+        let currDay = parseInt(currDate[0]);
+        let currMonth = parseInt(currDate[1]);
+        let nextDate = dates[i + 1].split("/");
+        let nextDay = parseInt(nextDate[0]);
+
+        if (nextDay == currDay + 1) {
+          count += 1;
+        } else if(currDay == monthsDays[currMonth - 1]) {
+          if(nextDay == 1){
+            count += 1;
+          } else {
+            count = 0;
+          }
+        } else {
+          count = 0;
+        }
+      }
+
+      counter.innerHTML = (count + 1);
+
       const renderCalendar = () => {
         let firstDayofMonth = new Date(currYear, currMonth, 1).getDay()
         let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate()
         let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay()
         let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate()
         let liTag = ""
-        
+
         for (let i = firstDayofMonth; i > 0; i--) {
           liTag += `<li class="inactive"></li>`;
         }
@@ -123,8 +154,8 @@
           let isToday = i === date.getDate() && currMonth === new Date().getMonth()
             && currYear === new Date().getFullYear() ? "active" : "";
 
-          let currDate = new Date(""+currYear+"-"+(currMonth+1)+"-"+i);
-          liTag += `<li class="${prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)? "active" : ""} ${isToday && !(prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)) ? "today" :""} ${!(isToday)&&(currDate < date)&&!(prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)) ? "not-achived" : ""} " >${prevData.includes(""+i+"/"+(currMonth+1)+"/"+currYear)?"&#10004;":i}</li>`;
+          let currDate = new Date("" + currYear + "-" + (currMonth + 1) + "-" + i);
+          liTag += `<li class="${prevData.includes("" + i + "/" + (currMonth + 1) + "/" + currYear) ? "active" : ""} ${isToday && !(prevData.includes("" + i + "/" + (currMonth + 1) + "/" + currYear)) ? "today" : ""} ${!(isToday) && (currDate < date) && !(prevData.includes("" + i + "/" + (currMonth + 1) + "/" + currYear)) ? "not-achived" : ""} " >${prevData.includes("" + i + "/" + (currMonth + 1) + "/" + currYear) ? "&#10004;" : i}</li>`;
         }
 
         for (let i = lastDayofMonth; i < 6; i++) {
@@ -150,15 +181,6 @@
         });
       });
     });
-
-
-
-
-
-
-
-
-
 
   </script>
 </body>
