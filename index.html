@@ -90,7 +90,7 @@
       });
     }
     btn.disabled = true;
-    if (today.getHours() >= 22) {
+    if (today.getHours() >= 21) {
       btn.disabled = false;
     }
 
@@ -99,7 +99,7 @@
         {
           dates: [...prevData, str]
         });
-      document.location.reload();
+        btn.disabled = true;
     })
 
     const starCountRef = ref(db, "achieved-dates");
