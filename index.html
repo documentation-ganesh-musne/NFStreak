@@ -99,7 +99,7 @@
         {
           dates: [...prevData, str]
         });
-        btn.disabled = true;
+      btn.disabled = true;
     })
 
     const starCountRef = ref(db, "achieved-dates");
@@ -126,10 +126,14 @@
       const counter = document.querySelector(".counter-count");
       let count = 0;
       let dates = prevData;
-      let day = (currDay-1) + "/" + (currMonth+1) + "/" + currYear;
-      let currToday = (currDay) + "/" + (currMonth+1) + "/" + currYear;
+      let day = (currDay - 1) + "/" + (currMonth + 1) + "/" + currYear;
+      let currToday = (currDay) + "/" + (currMonth + 1) + "/" + currYear;
 
       for (let i = 0; i < dates.length - 1; i++) {
+        if (today != dates[dates.length - 1] && dates[dates.length - 1] != day) {
+          count -= 1;
+          break;
+        }
         let currDate = dates[i].split("/");
         let currDay = parseInt(currDate[0]);
         let currMonth = parseInt(currDate[1]);
