@@ -95,7 +95,7 @@
     }
 
     btn.addEventListener('click', () => {
-      set(ref(db, "achieved-dates"),
+        set(ref(db, "achieved-dates"),
         {
           dates: [...prevData, str]
         });
@@ -125,19 +125,18 @@
 
       const counter = document.querySelector(".counter-count");
       let count = 0;
-      let dates = prevData;
-      let day = (currDay - 1) + "/" + (currMonth + 1) + "/" + currYear;
+      let allDates = prevData;
       let currToday = (currDay) + "/" + (currMonth + 1) + "/" + currYear;
+      let fullYesterdayDate = new Date(date);
+      fullYesterdayDate.setDate(date.getDate() - 1);
+      let yesterday = fullYesterdayDate.getDate() + "/" + (fullYesterdayDate.getMonth() + 1) + "/" + fullYesterdayDate.getFullYear()
 
-      for (let i = 0; i < dates.length - 1; i++) {
-        if (today != dates[dates.length - 1] && dates[dates.length - 1] != day) {
-          count -= 1;
-          break;
-        }
-        let currDate = dates[i].split("/");
+      for (let i = 0; i < allDates.length - 1; i++) {
+        
+        let currDate = allDates[i].split("/");
         let currDay = parseInt(currDate[0]);
         let currMonth = parseInt(currDate[1]);
-        let nextDate = dates[i + 1].split("/");
+        let nextDate = allDates[i + 1].split("/");
         let nextDay = parseInt(nextDate[0]);
 
         if (nextDay == currDay + 1) {
